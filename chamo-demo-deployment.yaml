@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chamo-demo-deployment
+  labels:
+    name: webserver-deployment
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      name: webserver-deployment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        name: webserver-deployment
+    spec:
+      volumes:
+      - name: chamo-demo-storage
+        nfs:
+          server: nfs-server.default.svc.cluster.local
+          path: "/"
+          readOnly: false
+      containers:
+      - name: webserver-00
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: chamo-demo-storage
+          mountPath: "/usr/share/nginx/html"
+        livenessProbe:
+          httpGet:
+            port: 80
+            path: /
+          initialDelaySeconds: 25
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 80
+            path: /
+          initialDelaySeconds: 25
+          timeoutSeconds: 5

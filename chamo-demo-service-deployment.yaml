@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chamo-demo-service
+spec:
+  type: LoadBalancer
+  selector:
+    name: webserver-deployment
+  ports:
+  - name: www
+    port: 80
+    protocol: TCP

@@ -1,0 +1,20 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#container-v1-core
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#pod-v1-core
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: chamo-demo
+  labels:
+    name: webserver
+spec:
+  volumes:
+    - name: chamo-demo-storage
+      persistentVolumeClaim:
+        claimName: chamo-demo-pvc
+  containers:
+  - name: webserver
+    image: nginx
+    volumeMounts:
+    - name: chamo-demo-storage
+      mountPath: "/usr/share/nginx"
