@@ -1,0 +1,37 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#statefulset-v1-apps
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: chamo-demo-statefulset
+  labels:
+    name: chamo-demo-statefulset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: nginx
+  serviceName: "chamo-demo-service-statefulset"
+  template:
+    metadata:
+      labels:
+        name: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 200Gi
+      storageClassName: chamo-demo-storageclass
