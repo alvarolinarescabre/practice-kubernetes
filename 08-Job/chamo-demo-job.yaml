@@ -1,0 +1,14 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: chamo-demo-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: chamo-demo-job
+        image: python
+        command: ["python", "-c", "print ('Hola, CICE')"]
+      restartPolicy: Never
+  backoffLimit: 4

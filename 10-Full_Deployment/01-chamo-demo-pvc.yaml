@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chamo-demo-pvc
+spec:
+  storageClassName: chamo-demo-storageclass
+  resources:
+    requests:
+      storage: 200Gi
+  accessModes:
+  - ReadWriteOnce

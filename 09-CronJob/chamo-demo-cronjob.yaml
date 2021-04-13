@@ -1,0 +1,22 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: chamo-demo-cronjob
+spec:
+  schedule: "*/1 * * * *"
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: chamo-demo-cronjob
+            image: debian
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - -c
+            - date; echo Hola CIE
+          restartPolicy: OnFailure

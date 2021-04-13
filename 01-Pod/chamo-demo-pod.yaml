@@ -8,13 +8,6 @@ metadata:
   labels:
     name: webserver
 spec:
-  volumes:
-    - name: chamo-demo-storage
-      persistentVolumeClaim:
-        claimName: chamo-demo-pvc
   containers:
   - name: webserver
     image: nginx
-    volumeMounts:
-    - name: chamo-demo-storage
-      mountPath: "/usr/share/nginx"
