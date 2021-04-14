@@ -3,8 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: chamo-demo-filestore-pvc
 spec:
+  storageClassName: ""
+  volumeName: chamo-demo-pv-filestore
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: 100G
