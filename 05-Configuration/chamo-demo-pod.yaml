@@ -7,8 +7,8 @@ spec:
   containers:
     - name: chamo-demo-pod
       image: debian
-      command: [ "/bin/bash", "-c", "--" ]
-      args: [ "while true; do sleep 30; done;" ]
+      command: [ "sleep" ]
+      args: [ "infinity" ]
       env:
         - name: CLOUD_1
           valueFrom:
@@ -28,5 +28,4 @@ spec:
       envFrom:  
       - secretRef:
            name: chamo-demo-secrets
-  restartPolicy: Never
 
