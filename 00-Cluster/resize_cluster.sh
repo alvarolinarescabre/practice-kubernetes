@@ -3,32 +3,39 @@
 Help()
 {
    # Display Help
-   echo "Script para agregar el doble de nodos a un cluster k8s en la región europe-west3."
+   echo "Script para cambiar el número de nodos a un cluster k8s."
    echo
-   echo "Syntax: create_cluster.sh [-n|-h]"
+   echo "Syntax: resize_cluster.sh [-n|-i|-z|-h]"
    echo "options:"
    echo "n     Nombre del Cluster k8s"
+   echo "i     Número de nodos a cambiar en el Cluster k8s"
+   echo "z     Zona donde reside el Cluster k8s"
    echo "h     Ayuda :D"
    echo
 }
 
-while getopts ":n:h" option; do
+while getopts ":n:i:z:h" option; do
    case $option in
         n)
             NAME=${OPTARG}
+            ;;
+        i)
+            NUM_NODES=${OPTARG}
+            ;;
+        z)
+            ZONE=${OPTARG}
             ;;
         h)
             Help
             ;;
         :)
-           echo "Error: Opción inválida. Opciones válidas: -n -h"
+           echo "Error: Opción inválida. Opciones válidas: -n -i -z -h"
            ;;
    esac
 done
 
-
-if [ $NAME ]; then
-	gcloud container clusters resize $NAME --num-nodes=2 --region europe-west3
+if [ $NAME ] && [ $NUM_NODES ] && [ $ZONE ]; then
+	gcloud container clusters resize $NAME --num-nodes=$NUM_NODES --zone $ZONE
 else
 	echo "Para más información utilice -h."
 fi

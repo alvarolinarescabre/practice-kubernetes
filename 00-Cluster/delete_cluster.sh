@@ -3,32 +3,38 @@
 Help()
 {
    # Display Help
-   echo "Script para eliminar un cluster k8s en la región europe-west3."
+   echo "Script para eliminar un cluster k8s."
    echo
-   echo "Syntax: delete_cluster.sh [-n|-h]"
+   echo "Syntax: delete_cluster.sh [-n|-z|-h]"
    echo "options:"
    echo "n     Nombre del Cluster k8s"
+   echo "z     Zona donde está el Cluster k8s"
    echo "h     Ayuda :D"
    echo
 }
 
-while getopts ":n:h" option; do
+while getopts ":n:z:h" option; do
    case $option in
         n)
             NAME=${OPTARG}
+            ;;
+        z)
+            ZONE=${OPTARG}
             ;;
         h)
             Help
             ;;
         :)
-           echo "Error: Opción inválida. Opciones válidas: -n -h"
+           echo "Error: Opción inválida. Opciones válidas: -n -z -h"
            ;;
    esac
 done
 
 
-if [ $NAME ]; then
-        gcloud container clusters delete $NAME --region europe-west3
+if [ $NAME ] && [ $ZONE ]; then
+        gcloud container clusters delete $NAME --zone $ZONE
 else
 	echo "Para más información utilice -h."
 fi
+
+
