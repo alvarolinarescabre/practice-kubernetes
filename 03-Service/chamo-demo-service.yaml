@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: chamo-demo-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
    name: webserver
   ports:

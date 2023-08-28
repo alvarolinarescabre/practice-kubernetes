@@ -23,10 +23,8 @@ spec:
     spec:
       volumes:
       - name: chamo-demo-storage
-        nfs:
-          server: nfs-server.default.svc.cluster.local
-          path: "/"
-          readOnly: false
+        configMap:
+          name: chamo-demo-configmap
       containers:
       - name: webserver-00
         image: nginx

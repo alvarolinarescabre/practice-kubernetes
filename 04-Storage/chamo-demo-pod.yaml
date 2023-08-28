@@ -10,9 +10,9 @@ spec:
     image: nginx:latest
     volumeMounts:
     - mountPath: /usr/share/nginx/html
-      name: chamo-demo-filestore-pvc
+      name: chamo-demo-pvc
   volumes:
-  - name: chamo-demo-filestore-pvc
+  - name: chamo-demo-pvc
     persistentVolumeClaim:
-      claimName: chamo-demo-filestore-pvc
+      claimName: chamo-demo-pvc
       readOnly: false

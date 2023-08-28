@@ -6,10 +6,13 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: chamo-demo-storageclass
+  storageClassName: ""
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
+  claimRef:
+     namespace: default
+     name: chamo-demo-pvc
   hostPath:
-    path: "/mnt/data"
+    path: "/tmp/data"

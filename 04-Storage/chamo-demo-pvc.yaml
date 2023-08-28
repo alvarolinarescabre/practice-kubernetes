@@ -4,9 +4,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: chamo-demo-pvc
 spec:
-  storageClassName: chamo-demo-storageclass
+  storageClassName: ""
   resources:
     requests:
-      storage: 200Gi
+      storage: 5Gi
   accessModes:
   - ReadWriteOnce
