@@ -18,5 +18,5 @@ spec:
             command:
             - /bin/bash
             - -c
-            - date; echo Hola CIE
+            - date; echo "Hola Chamo!"
           restartPolicy: OnFailure
