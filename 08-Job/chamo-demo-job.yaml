@@ -9,6 +9,6 @@ spec:
       containers:
       - name: chamo-demo-job
         image: python
-        command: ["python", "-c", "print ('Hola, CICE')"]
+        command: ["python", "-c", "print ('Hola, Chamo!')"]
       restartPolicy: Never
   backoffLimit: 4
