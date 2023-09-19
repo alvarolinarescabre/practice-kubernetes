@@ -1,7 +1,7 @@
 resource "kubernetes_ingress_v1" "nginx-ingress" {
    metadata {
       name        = "nginx-ingress"
-      namespace   = "chamo"
+      namespace   = kubernetes_namespace.chamo.metadata.0.name
       annotations = {
         "nginx.ingress.kubernetes.io/rewrite-target": "/"
       }
