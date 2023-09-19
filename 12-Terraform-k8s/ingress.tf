@@ -16,7 +16,7 @@ resource "kubernetes_ingress_v1" "nginx-ingress" {
              service {
                name = "nginx"
                port {
-                 number = 8080
+                 number = 80
                }
              }
            }
